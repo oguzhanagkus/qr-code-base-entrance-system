@@ -1,0 +1,22 @@
+{
+    "encryption": {
+        "key": "w8nQ6ZXdRrjA2PjR",
+        "iv": "sG5ZMQ2qLp7WQgm0"
+    },
+    "hardware": {
+        "url": "http://192.168.25.5:11001/api/make_query/",
+        "key": "3EYFIc48AKz7GzlK",
+        "iv": "GZTUlYH1Kcmcsopg"
+    },
+    "hes_api": {
+        "url": "https://161.35.213.236/query",
+        "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiYWRtaW4iLCJleHAiOjE2NzMyNzA5NTJ9.MmldNrKnVGNaeM__zJ8EDT_xOv-MxaHXe0VE-erxGgc"
+    },
+    "email": {
+        "host": "smtp.gmail.com",
+        "port": 587,
+        "use_tls": true,
+        "user": "your_mail@gmail.com",
+        "password": "your_passowrd"
+    }
+}

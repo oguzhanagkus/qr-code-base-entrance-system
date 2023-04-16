@@ -1,0 +1,62 @@
+{% extends "elements/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+    <!-- Heading -->
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Settings</h1>
+    </div>
+
+    <!-- Save button -->
+    <button type="submit" class="btn btn-primary btn-icon-split mb-4" form="form">
+        <span class="icon text-white-50">
+            <i class="fas fa-save"></i>
+        </span>
+        <span class="text">Save</span>
+    </button>
+
+    <!-- Form -->
+    <div class="row mt-2">
+        <div class="col-auto">
+            <form id="form" action="" method="post" enctype="multipart/form-data">
+                <h1 class="h5 mb-2 text-gray-800">HES API</h1>
+                <div class="form-group">
+                    <label for="{{ form.hes_api_url.id_for_label }}">URL</label>
+                    {{ form.hes_api_url }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.hes_api_token.id_for_label }}">Token</label>
+                    {{ form.hes_api_token }}
+                </div>
+                <hr>
+
+                <h1 class="h5 mb-2 text-gray-800">Email</h1>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="{{ form.email_host.id_for_label }}">Host</label>
+                        {{ form.email_host }}
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="{{ form.email_port.id_for_label }}">Port</label>
+                        {{ form.email_port }}
+                    </div>
+                    <div class="form-group col-md-2 text-center">
+                        <label for="{{ form.email_use_tls.id_for_label }}">Use TLS</label>
+                        {{ form.email_use_tls }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.email_user.id_for_label }}">User</label>
+                    {{ form.email_user }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.email_password.id_for_label }}">Password</label>
+                    {{ form.email_password }}
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

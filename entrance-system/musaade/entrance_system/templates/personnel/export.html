@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personnel</title>
+
+    <style>
+        @page {
+            size: A4;
+            margin: 2.5cm 1.5cm 3.5cm 1.5cm;
+
+            @bottom-left {
+                content: "Müsaade | Entrance Management System";
+                font-size: 10px;
+            }
+
+            @bottom-right {
+                content: "Page " counter(page) " of " counter(pages);
+                font-size: 10px;
+            }
+        }
+
+        table {
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 5px;
+            height: 25px;
+            font-size: 10px;
+            font-family: sans-serif;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        {% for column_name in column_names %}
+            <th>{{ column_name }}</th>
+        {% endfor %}
+    </tr>
+    </thead>
+    <tbody>
+    {% for personnel in data %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ personnel.national_id }}</td>
+            <td>{{ personnel.first_name }}</td>
+            <td>{{ personnel.last_name }}</td>
+            <td>{{ personnel.email }}</td>
+            <td>{{ personnel.department }}</td>
+            <td>{{ personnel.last_activity|date:"Y-m-d H:i:s" }}</td>
+            <td>{% if personnel.active %}Yes{% else %}No{% endif %}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

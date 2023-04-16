@@ -1,0 +1,39 @@
+{% extends "elements/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheet %}
+    <!-- Custom styles for this page -->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- Heading -->
+    <h1 class="h3 mb-3 text-gray-800">{{ title }}</h1>
+
+    <!-- Save button -->
+    <button type="submit" class="btn btn-primary btn-icon-split mb-4" form="department_form">
+        <span class="icon text-white-50">
+            <i class="fas fa-save"></i>
+        </span>
+        <span class="text">Save</span>
+    </button>
+
+    <!-- Form -->
+    <div class="row mt-2">
+        <div class="col-auto">
+            <form id="department_form" action="" method="post" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <form id="add_form" action="add/" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="{{ department_form.name.id_for_label }}">Name</label>
+                            {{ department_form.name }}
+                        </div>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

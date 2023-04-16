@@ -1,0 +1,9 @@
+/__pycache__/
+/api/__pycache__/
+/api/migrations/__pycache__/
+/entrance_system/__pycache__/
+/entrance_system/migrations/__pycache__/
+/entrance_system/views/__pycache__/
+/musaade/__pycache__/
+
+/static_files/

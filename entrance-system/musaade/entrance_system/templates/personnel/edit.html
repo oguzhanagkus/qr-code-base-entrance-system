@@ -1,0 +1,75 @@
+{% extends "elements/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheet %}
+    <!-- Custom styles for this page -->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- Heading -->
+    <h1 class="h3 mb-3 text-gray-800">{{ title }}</h1>
+
+    <!-- Save button -->
+    <button type="submit" class="btn btn-primary btn-icon-split mb-4" form="personnel_form">
+        <span class="icon text-white-50">
+            <i class="fas fa-save"></i>
+        </span>
+        <span class="text">Save</span>
+    </button>
+
+    <!-- Send button -->
+    <a href="send_qr_code" class="btn btn-primary btn-icon-split mb-4">
+        <span class="icon text-white-50">
+            <i class="fas fa-envelope"></i>
+        </span>
+        <span class="text">Send QR Code</span>
+    </a>
+
+    <!-- Renew button -->
+    <a href="renew_qr_code" class="btn btn-primary btn-icon-split mb-4">
+        <span class="icon text-white-50">
+            <i class="fas fa-sync-alt"></i>
+        </span>
+        <span class="text">Renew QR Code</span>
+    </a>
+
+    <!-- Form -->
+    <div class="row mt-2">
+        <div class="col-auto">
+            <form id="personnel_form" action="" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="{{ personnel_form.national_id.id_for_label }}">National ID</label>
+                    {{ personnel_form.national_id }}
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="{{ personnel_form.first_name.id_for_label }}">First Name</label>
+                        {{ personnel_form.first_name }}
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="{{ personnel_form.last_name.id_for_label }}">Last Name</label>
+                        {{ personnel_form.last_name }}
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="{{ personnel_form.email.id_for_label }}">Email</label>
+                    {{ personnel_form.email }}
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-10">
+                        <label for="{{ personnel_form.department.id_for_label }}">Department</label>
+                        {{ personnel_form.department }}
+                    </div>
+                    <div class="form-group col-md-2 text-center">
+                        <label for="{{ personnel_form.active.id_for_label }}">Active</label>
+                        {{ personnel_form.active }}
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

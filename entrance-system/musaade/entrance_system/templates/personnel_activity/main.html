@@ -1,0 +1,95 @@
+{% extends "elements/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheet %}
+    <!-- Custom styles for this page -->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- Export modal -->
+    {% include "elements/modal_export.html" %}
+
+    <!-- Heading -->
+    <h1 class="h3 mb-3 text-gray-800">{{ title }}</h1>
+
+    <!-- Export button -->
+    <button type="button" class="btn btn-danger btn-icon-split mb-4" data-toggle="modal" data-target="#exportModal">
+        <span class="icon text-white-50">
+            <i class="fas fa-file-export"></i>
+        </span>
+        <span class="text">Export</span>
+    </button>
+
+    <!-- Table -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">{% block table_tile %}{{ title }}{% endblock %}</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Personnel</th>
+                        <th>Time</th>
+                        <th>Location</th>
+                        <th>Result</th>
+                        <th>Message</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for activity in activities %}
+                        <tr>
+                            <td></td>
+                            <td>{{ activity.personnel }}</td>
+                            <td>{{ activity.time|date:"Y-m-d | H:i:s" }}</td>
+                            <td>{{ activity.location }}</td>
+                            <td>
+                                {% if activity.result %}
+                                    <span class="btn btn-success btn-circle btn-sm mr-1">
+                                        <i class="fas fa-check"></i>
+                                    </span>
+                                    <span style="visibility: hidden">Yes</span>
+                                {% else %}
+                                    <span class="btn btn-outline-secondary btn-circle btn-sm mr-1">
+                                        <i class="fas fa-times"></i>
+                                    </span>
+                                    <span style="visibility: hidden">No</span>
+                                {% endif %}
+                            </td>
+                            <td>{{ activity.message }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <!-- Page level plugins -->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            let t = $('#dataTable').DataTable({
+                columnDefs: [
+                    {searchable: false, orderable: false, targets: [0, 5]},
+                ],
+                aLengthMenu: [[10, 25, -1], [10, 25, "All"]],
+            });
+
+            t.on('order.dt search.dt', function () {
+                t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }).draw();
+        });
+    </script>
+{% endblock %}

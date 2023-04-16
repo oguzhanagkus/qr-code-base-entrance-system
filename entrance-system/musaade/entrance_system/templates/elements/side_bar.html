@@ -1,0 +1,61 @@
+<ul class="navbar-nav bg-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/entrance_system/dashboard">
+        <div class="sidebar-brand-icon">
+            <i class="fas fa-door-open"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Müsaade</div>
+    </a>
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item {% if 'Dashboard' in title %} active {% endif %}">
+        <a class="nav-link" href="/entrance_system/dashboard/">
+            <i class="fas fa-fw fa-columns"></i>
+            <span>Dashboard</span></a>
+    </li>
+    <li class="nav-item {% if 'Personnel' in title %} active {% endif %}">
+        <a class="nav-link" href="/entrance_system/personnel/">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Personnel</span></a>
+    </li>
+    <li class="nav-item {% if 'Department' in title %} active {% endif %}">
+        <a class="nav-link" href="/entrance_system/departments/">
+            <i class="fas fa-fw fa-users"></i>
+            <span>Departments</span></a>
+    </li>
+    <li class="nav-item {% if 'Location' in title %} active {% endif %}">
+        <a class="nav-link" href="/entrance_system/locations/">
+            <i class="fas fa-fw fa-map-marker-alt"></i>
+            <span>Locations</span></a>
+    </li>
+    <li class="nav-item {% if 'Access Point' in title %} active {% endif %}">
+        <a class="nav-link" href="/entrance_system/access_points/">
+            <i class="fas fa-fw fa-wifi"></i>
+            <span>Access Points</span></a>
+    </li>
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item {% if 'Personnel Activity' == title %} active {% endif %}">
+        <a class="nav-link" href="/entrance_system/personnel_activity/">
+            <i class="fas fa-fw fa-walking"></i>
+            <span>Personnel Activity</span></a>
+    </li>
+    <li class="nav-item {% if 'HES Activity' in title %} active {% endif %}">
+        <a class="nav-link" href="/entrance_system/hes_activity/">
+            <i class="fas fa-fw fa-heart"></i>
+            <span>HES Activity</span></a>
+    </li>
+    <hr class="sidebar-divider my-0">
+
+    <hr class="sidebar-divider my-0">
+    <li class="nav-item {% if 'Settings' in title %} active {% endif %}">
+        <a class="nav-link" href="/entrance_system/settings/">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Settings</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/entrance_system/logout/">
+            <i class="fas fa-fw fa-sign-out-alt"></i>
+            <span>Logout</span></a>
+    </li>
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+</ul>
