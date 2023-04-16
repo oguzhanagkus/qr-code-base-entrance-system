@@ -1,0 +1,4 @@
+FROM dpage/pgadmin4
+
+ENV PGADMIN_DEFAULT_EMAIL admin@localhost.com
+ENV PGADMIN_DEFAULT_PASSWORD 1234

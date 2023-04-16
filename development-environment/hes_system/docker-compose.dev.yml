@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  database:
+    container_name: hes_database
+    build: ./services/database
+    ports:
+      - "10000:5432"
+    volumes:
+      - postgresql_data:/var/lib/database/data/
+    env_file:
+      - ./.env.db
+  api:
+    container_name: hes_api
+    build:
+      context: ./services/api
+      dockerfile: Dockerfile.dev
+    command: python manage.py run --host 0.0.0.0 --port=5000
+    ports:
+      - "10001:5000"
+    volumes:
+      - ./services/api/:/usr/src/app/
+    env_file:
+      - ./.env.dev
+    depends_on:
+      - database
+
+volumes:
+  postgresql_data:
+    name: hes_database_volume

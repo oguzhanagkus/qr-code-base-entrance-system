@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  database:
+    container_name: hes_database
+    build: ./services/database
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.db
+  api:
+    container_name: hes_api
+    build:
+      context: ./services/api
+      dockerfile: Dockerfile.prod
+    command: gunicorn --bind 0.0.0.0:5000 manage:app
+    ports:
+      - "5000:5000"
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - database
+  server:
+    container_name: hes_server
+    build: ./services/server
+    ports:
+      - "443:443"
+    volumes:
+      - ./services/server/certs:/etc/nginx/certs
+    depends_on:
+      - api
+
+volumes:
+  postgresql_data:
+    name: hes_database_volume
