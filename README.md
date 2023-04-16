@@ -1,2 +1,2 @@
 # Müsaade - Entrance Management System
-Graduation project
+This is my first graduation project.
