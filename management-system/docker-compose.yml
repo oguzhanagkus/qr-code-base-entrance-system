@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  database:
+    container_name: management_system_database
+    build: ./services/database
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.db
+  service:
+    container_name: management_system
+    build: ./musaade/
+    command: gunicorn --bind 0.0.0.0:5000 musaade.wsgi:application
+    ports:
+      - "5000:5000"
+    volumes:
+      - static_files:/usr/src/app/static_files
+    env_file:
+      - ./.env.prod
+    depends_on:
+      - database
+  server:
+    container_name: management_system_server
+    build: ./services/server
+    ports:
+      - "443:443"
+    volumes:
+      - ./services/server/certs:/etc/nginx/certs
+      - static_files:/src/static
+    depends_on:
+      - service
+
+volumes:
+  postgresql_data:
+    name: database_volume
+  static_files:
+    name: static_files_volume

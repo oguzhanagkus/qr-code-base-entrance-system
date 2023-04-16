@@ -1,0 +1,128 @@
+{% extends "elements/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheet %}
+    <!-- Custom styles for this page -->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- Add modal -->
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addModalLabel">Add Customer</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="add_form" action="add/" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="{{ customer_form.company_name.id_for_label }}">Company Name</label>
+                            {{ customer_form.company_name }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ customer_form.person_name.id_for_label }}">Person Name</label>
+                            {{ customer_form.person_name }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ customer_form.email.id_for_label }}">Email</label>
+                            {{ customer_form.email }}
+                        </div>
+                        <div class="form-group">
+                            <label for="{{ customer_form.hardware_count.id_for_label }}">Hardware Count</label>
+                            {{ customer_form.hardware_count }}
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-success" form="add_form">Add</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Heading -->
+    <h1 class="h3 mb-3 text-gray-800">{{ title }}</h1>
+
+    <!-- Add button -->
+    <button type="button" class="btn btn-success btn-icon-split mb-4" data-toggle="modal" data-target="#addModal">
+        <span class="icon text-white-50">
+            <i class="fas fa-plus"></i>
+        </span>
+        <span class="text">Add</span>
+    </button>
+
+    <!-- Table -->
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-secondary">{% block table_tile %}{{ title }}{% endblock %}</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Company Name</th>
+                        <th>Person Name</th>
+                        <th>Email</th>
+                        <th>Hardware Count</th>
+                        <th>Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for customer in customer_list %}
+                        <tr>
+                            <td></td>
+                            <td>{{ customer.company_name }}</td>
+                            <td>{{ customer.person_name }}</td>
+                            <td>{{ customer.email }}</td>
+                            <td>{{ customer.hardware_count }}</td>
+                            <td>
+                                <a href="edit/{{ customer.id }}"
+                                   class="btn btn-warning btn-circle btn-sm mr-1">
+                                    <i class="fas fa-pen"></i>
+                                </a>
+                                <a href="delete/{{ customer.id }}"
+                                   class="btn btn-danger btn-circle btn-sm mr-1">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <!-- Page level plugins -->
+    <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+            let t = $('#dataTable').DataTable({
+                columnDefs: [
+                    {searchable: false, orderable: false, targets: [0]},
+                ],
+                aLengthMenu: [[10, 25, -1], [10, 25, "All"]],
+            });
+
+            t.on('order.dt search.dt', function () {
+                t.column(0, {search: 'applied', order: 'applied'}).nodes().each(function (cell, i) {
+                    cell.innerHTML = i + 1;
+                });
+            }).draw();
+        });
+    </script>
+{% endblock %}

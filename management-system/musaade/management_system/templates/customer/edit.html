@@ -1,0 +1,47 @@
+{% extends "elements/base.html" %}
+{% load static %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block stylesheet %}
+    <!-- Custom styles for this page -->
+    <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <!-- Heading -->
+    <h1 class="h3 mb-3 text-gray-800">{{ title }}</h1>
+
+    <!-- Save button -->
+    <button type="submit" class="btn btn-primary btn-icon-split mb-4" form="personnel_form">
+        <span class="icon text-white-50">
+            <i class="fas fa-save"></i>
+        </span>
+        <span class="text">Save</span>
+    </button>
+
+    <!-- Form -->
+    <div class="row mt-2">
+        <div class="col-3">
+            <form id="personnel_form" action="" method="post" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="{{ customer_form.company_name.id_for_label }}">Company Name</label>
+                    {{ customer_form.company_name }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ customer_form.person_name.id_for_label }}">Person Name</label>
+                    {{ customer_form.person_name }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ customer_form.email.id_for_label }}">Email</label>
+                    {{ customer_form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ customer_form.hardware_count.id_for_label }}">Hardware Count</label>
+                    {{ customer_form.hardware_count }}
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,13 @@
+{
+  "email": {
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "use_tls": true,
+    "user": "your_mail98@gmail.com",
+    "password": "your_password"
+  },
+  "digital_ocean_api": {
+    "url": "https://api.digitalocean.com/v2",
+    "token": "your_token"
+  }
+}
